@@ -17,11 +17,10 @@ limitations under the License.
 import logging
 from datetime import datetime
 from time import time
-from typing_extensions import Any
 
 from dotenv import load_dotenv
 from pydantic import BaseModel
-from typing_extensions import LiteralString
+from typing_extensions import Any, LiteralString
 
 from graphiti_core.cross_encoder.client import CrossEncoderClient
 from graphiti_core.cross_encoder.openai_reranker_client import OpenAIRerankerClient
@@ -617,7 +616,7 @@ class Graphiti:
                 for episode in bulk_episodes
             ]
 
-            for raw_ep, ep in zip(bulk_episodes, episodes):
+            for raw_ep, ep in zip(bulk_episodes, episodes, strict=False):
                 if raw_ep.uuid is not None and raw_ep.metadata is not None:
                     ep.metadata.update(raw_ep.metadata)
 
